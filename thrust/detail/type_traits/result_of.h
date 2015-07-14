@@ -30,12 +30,15 @@ namespace thrust
 namespace detail
 {
 
-#if __cplusplus >= 201103L || defined(__cpp_lib_result_of_sfinae)
+#if __cplusplus >= 201103L || (defined(__cpp_variadic_templates) && defined(__cpp_lib_result_of_sfinae))
 
 template<typename Signature>
-  struct result_of
+  struct result_of;
+
+template<typename R, typename... Args>
+  struct result_of<R(Args...)>
 {
-  typedef typename std::result_of<Signature>::type type;
+  typedef typename std::result_of<R(Args&...)>::type type;
 };
 
 #else
