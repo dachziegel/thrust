@@ -98,10 +98,6 @@ __host__ __device__
                              OutputIterator output,
                              BinaryPredicate binary_pred)
 {
-  // empty sequence
-  if(first == last)
-    return output;
-  
   thrust::detail::head_flags<InputIterator, BinaryPredicate> stencil(first, last, binary_pred);
   
   using namespace thrust::placeholders;
@@ -114,4 +110,3 @@ __host__ __device__
 } // end namespace detail
 } // end namespace system
 } // end namespace thrust
-
